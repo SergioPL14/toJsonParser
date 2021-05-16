@@ -2,8 +2,10 @@ package com.example.toJsonParser;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,12 +18,10 @@ import java.util.Map;
 
 public class CsvToJson {
 
-    public static void main(String[] args) throws Exception {
-        File input = new File("D:/dev/toJsonParser/files/2020-02-09T16.00.00-testfile3.csv");
-        File output = new File("D:/dev/toJsonParser/files/out.json");
+    public String parseCsvToJson(File input, File output) throws Exception {
 
         List<Map<?, ?>> data = readObjectsFromCsv(input);
-        writeAsJson(data, output, input);
+        return writeAsJson(data, output, input);
     }
 
     public static List<Map<?, ?>> readObjectsFromCsv(File file) throws IOException {
@@ -32,7 +32,7 @@ public class CsvToJson {
         return mappingIterator.readAll();
     }
 
-    public static void writeAsJson(List<Map<?, ?>> data, File outFile, File inFile) throws IOException {
+    public String writeAsJson(List<Map<?, ?>> data, File outFile, File inFile) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String name = inFile.getName();
         Map<String, Object> map = new HashMap<String, Object>();
@@ -46,5 +46,8 @@ public class CsvToJson {
         map.put("payload", data);
 
         mapper.writeValue(outFile, map);
+        String json = new ObjectMapper().writeValueAsString(map);
+
+        return json;
     }
 }
