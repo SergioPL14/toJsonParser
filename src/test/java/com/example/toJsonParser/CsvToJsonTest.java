@@ -16,7 +16,7 @@ import java.io.File;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
-@TestPropertySource("/application-test.properties")
+//@TestPropertySource("/application-test.properties")
 @SpringBootTest(
         classes = ToJsonParserApplication.class)
 public class CsvToJsonTest {
@@ -24,17 +24,17 @@ public class CsvToJsonTest {
     @Autowired
     private CsvToJson parser;
 
-    @Value("${input}") String inputPath;
-    File input = new File(inputPath);
-
-    @Value("${output}") String outputPath;
-    File output = new File(outputPath);
+//    @Value("${input}") String inputPath;
+//    File input = new File(inputPath);
+//
+//    @Value("${output}") String outputPath;
+//    File output = new File(outputPath);
 
     @Test
     public void fileHasCorrectStructure() throws Exception {
-        String outFile = parser.parseCsvToJson(input, output);
+        String outFile = parser.parseCsvToJson(/*input, output*/);
 
-        System.out.println("FILE: " + output);
+        System.out.println("FILE: " + outFile);
         assertTrue(outFile.contains("mac"));
         assertTrue(outFile.contains("created"));
         assertTrue(outFile.contains("payload"));

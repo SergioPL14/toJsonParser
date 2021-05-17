@@ -17,11 +17,19 @@ import java.util.List;
 import java.util.Map;
 
 public class CsvToJson {
+    @Value("${input}")
+    private String input;
 
-    public String parseCsvToJson(File input, File output) throws Exception {
+    @Value("${output}")
+    private String output;
 
-        List<Map<?, ?>> data = readObjectsFromCsv(input);
-        return writeAsJson(data, output, input);
+    public String parseCsvToJson(/*File input, File output*/) throws Exception {
+
+        File in = new File(input);
+        List<Map<?, ?>> data = readObjectsFromCsv(in);
+
+        File out = new File(output);
+        return writeAsJson(data, out, in);
     }
 
     public static List<Map<?, ?>> readObjectsFromCsv(File file) throws IOException {
