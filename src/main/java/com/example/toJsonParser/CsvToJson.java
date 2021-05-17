@@ -2,7 +2,6 @@ package com.example.toJsonParser;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +22,7 @@ public class CsvToJson {
     @Value("${output}")
     private String output;
 
-    public String parseCsvToJson(/*File input, File output*/) throws Exception {
+    public String parseCsvToJson() throws Exception {
 
         File in = new File(input);
         List<Map<?, ?>> data = readObjectsFromCsv(in);

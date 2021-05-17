@@ -16,19 +16,12 @@ import java.io.File;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
-//@TestPropertySource("/application-test.properties")
 @SpringBootTest(
         classes = ToJsonParserApplication.class)
 public class CsvToJsonTest {
 
     @Autowired
     private CsvToJson parser;
-
-//    @Value("${input}") String inputPath;
-//    File input = new File(inputPath);
-//
-//    @Value("${output}") String outputPath;
-//    File output = new File(outputPath);
 
     @Test
     public void fileHasCorrectStructure() throws Exception {
